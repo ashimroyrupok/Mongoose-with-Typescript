@@ -26,6 +26,7 @@ const getProductsFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
 const getSingleProduct = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const objId = new mongoose_1.default.Types.ObjectId(id);
     const result = yield product_model_1.Product.aggregate([{ $match: { _id: objId } }]);
+    // const result = await Product.findOne({_id:objId})
     return result;
 });
 const updateProduct = (id, product) => __awaiter(void 0, void 0, void 0, function* () {
@@ -47,6 +48,10 @@ const deleteProduct = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const objId = new mongoose_1.default.Types.ObjectId(id);
     const result = yield product_model_1.Product.findOneAndDelete({ _id: objId });
     return result;
+});
+const searchProductFromDB = (str) => __awaiter(void 0, void 0, void 0, function* () {
+    const regex = new RegExp(`\\b${str}\\b`, "i");
+    const results = yield product_model_1.Product.find({ name: regex });
 });
 exports.ProductServices = {
     createProductIntoDB,

@@ -34,4 +34,4 @@ const productSchema = new mongoose_1.Schema({
         required: true,
     },
 });
-exports.Product = (0, mongoose_1.model)("Products", productSchema);
+exports.Product = (0, mongoose_1.model)("Product", productSchema);

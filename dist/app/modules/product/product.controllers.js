@@ -95,7 +95,7 @@ const deleteSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, func
         res.status(200).json({
             success: true,
             message: "product is successfully deleted",
-            data: result
+            data: result,
         });
     }
     catch (error) {
@@ -106,10 +106,30 @@ const deleteSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, func
         });
     }
 });
+// search
+const searchProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const query = req.query;
+        if (query) {
+            console.log(query, "sa");
+        }
+        else {
+            console.log("hello");
+        }
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error when get search product",
+            details: error,
+        });
+    }
+});
 exports.ProductControllers = {
     createProduct,
     getAllProduct,
     getSingleProduct,
     updateSingleProduct,
-    deleteSingleProduct
+    deleteSingleProduct,
+    searchProduct,
 };

@@ -15,6 +15,7 @@ const getProductsFromDB = async () => {
 const getSingleProduct = async (id: string) => {
   const objId = new mongoose.Types.ObjectId(id);
   const result = await Product.aggregate([{ $match: { _id: objId } }]);
+  // const result = await Product.findOne({_id:objId})
   return result;
 };
 
@@ -40,6 +41,13 @@ const deleteProduct = async (id: string) => {
     const result = await Product.findOneAndDelete({ _id: objId})
     return result;
 }
+
+const searchProductFromDB = async(str:string)=>{
+  const regex = new RegExp(`\\b${str}\\b`, "i");
+
+  const results = await Product.find({ name: regex });
+}
+
 
 export const ProductServices = {
   createProductIntoDB,

@@ -77,31 +77,49 @@ const updateSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
-
 // delete single product
 
-const deleteSingleProduct = async (req: Request, res: Response)=>{
+const deleteSingleProduct = async (req: Request, res: Response) => {
   try {
-    const {productId} = req.params
-  const result = await ProductServices.deleteProduct(productId);
-  res.status(200).json({
-    success: true,
-    message: "product is successfully deleted",
-    data: result
-  });
+    const { productId } = req.params;
+    const result = await ProductServices.deleteProduct(productId);
+    res.status(200).json({
+      success: true,
+      message: "product is successfully deleted",
+      data: result,
+    });
   } catch (error) {
-     res.status(500).json({
+    res.status(500).json({
       success: false,
       message: "Error when delete single product",
       details: error,
     });
   }
-}
+};
+
+// search
+const searchProduct = async (req: Request, res: Response) => {
+  try {
+    const query = req.query;
+    if (query) {
+      console.log(query, "sa");
+    } else {
+      console.log("hello");
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error when get search product",
+      details: error,
+    });
+  }
+};
 
 export const ProductControllers = {
   createProduct,
   getAllProduct,
   getSingleProduct,
   updateSingleProduct,
-  deleteSingleProduct
+  deleteSingleProduct,
+  searchProduct,
 };
