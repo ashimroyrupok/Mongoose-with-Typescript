@@ -22,6 +22,16 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProduct = async (req: Request, res: Response) => {
   try {
+    const { searchTerm } = req.query;
+    if (searchTerm) {
+      const result2 = await ProductServices.searchProductFromDB(searchTerm);
+      console.log(result2);
+      return res.status(200).json({
+        success: true,
+        message: "successfully search product",
+        data: result2,
+      });
+    }
     const result = await ProductServices.getProductsFromDB();
     res.status(200).json({
       success: true,
@@ -51,7 +61,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error when get single product",
+      message: "product is not exist",
       details: error,
     });
   }
@@ -98,22 +108,6 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
 };
 
 // search
-const searchProduct = async (req: Request, res: Response) => {
-  try {
-    const query = req.query;
-    if (query) {
-      console.log(query, "sa");
-    } else {
-      console.log("hello");
-    }
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error when get search product",
-      details: error,
-    });
-  }
-};
 
 export const ProductControllers = {
   createProduct,
@@ -121,5 +115,4 @@ export const ProductControllers = {
   getSingleProduct,
   updateSingleProduct,
   deleteSingleProduct,
-  searchProduct,
 };

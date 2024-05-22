@@ -37,22 +37,23 @@ const updateProduct = async (id: string, product: TProduct) => {
 };
 
 const deleteProduct = async (id: string) => {
-    const objId = new mongoose.Types.ObjectId(id);
-    const result = await Product.findOneAndDelete({ _id: objId})
-    return result;
-}
+  const objId = new mongoose.Types.ObjectId(id);
+  const result = await Product.findOneAndDelete({ _id: objId });
+  return result;
+};
 
-const searchProductFromDB = async(str:string)=>{
+const searchProductFromDB = async (str: any) => {
   const regex = new RegExp(`\\b${str}\\b`, "i");
 
   const results = await Product.find({ name: regex });
-}
-
+  return results;
+};
 
 export const ProductServices = {
   createProductIntoDB,
   getProductsFromDB,
   getSingleProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  searchProductFromDB,
 };

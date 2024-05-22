@@ -12,5 +12,5 @@ router.get("/", product_controllers_1.ProductControllers.getAllProduct);
 router.get("/:productId", product_controllers_1.ProductControllers.getSingleProduct);
 router.put("/:productId", product_controllers_1.ProductControllers.updateSingleProduct);
 router.delete("/:productId", product_controllers_1.ProductControllers.deleteSingleProduct);
-router.get("/", product_controllers_1.ProductControllers.searchProduct);
+// router.get("/", ProductControllers.searchProduct);
 exports.productRoutes = router;

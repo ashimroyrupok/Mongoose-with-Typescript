@@ -32,6 +32,16 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 });
 const getAllProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const { searchTerm } = req.query;
+        if (searchTerm) {
+            const result2 = yield product_services_1.ProductServices.searchProductFromDB(searchTerm);
+            console.log(result2);
+            return res.status(200).json({
+                success: true,
+                message: "successfully search product",
+                data: result2,
+            });
+        }
         const result = yield product_services_1.ProductServices.getProductsFromDB();
         res.status(200).json({
             success: true,
@@ -62,7 +72,7 @@ const getSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error when get single product",
+            message: "product is not exist",
             details: error,
         });
     }
@@ -107,29 +117,10 @@ const deleteSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 });
 // search
-const searchProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const query = req.query;
-        if (query) {
-            console.log(query, "sa");
-        }
-        else {
-            console.log("hello");
-        }
-    }
-    catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Error when get search product",
-            details: error,
-        });
-    }
-});
 exports.ProductControllers = {
     createProduct,
     getAllProduct,
     getSingleProduct,
     updateSingleProduct,
     deleteSingleProduct,
-    searchProduct,
 };

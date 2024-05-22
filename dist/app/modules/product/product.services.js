@@ -52,11 +52,13 @@ const deleteProduct = (id) => __awaiter(void 0, void 0, void 0, function* () {
 const searchProductFromDB = (str) => __awaiter(void 0, void 0, void 0, function* () {
     const regex = new RegExp(`\\b${str}\\b`, "i");
     const results = yield product_model_1.Product.find({ name: regex });
+    return results;
 });
 exports.ProductServices = {
     createProductIntoDB,
     getProductsFromDB,
     getSingleProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    searchProductFromDB,
 };
